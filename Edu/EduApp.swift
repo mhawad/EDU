@@ -9,12 +9,19 @@ import SwiftUI
 
 @main
 struct EduApp: App {
+    
+    @StateObject var vm = HomeViewModel()
     var body: some Scene {
         WindowGroup {
             NavigationView {
-           // WelcomeView()
-              AboutView()
+                WelcomeView()
+                // HomeView()
+                //  AboutView()
+                // MainTabView()
+                //  ContactView()
+                //AdmissionView()
             }
+            .environmentObject(vm)
         }
     }
 }

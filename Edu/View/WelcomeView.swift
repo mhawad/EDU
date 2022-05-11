@@ -48,9 +48,9 @@ struct WelcomeView: View {
                     Spacer()
                     
                     NavigationLink {
-                        HomeView()
+                       MainTabView()
                     } label: {
-                       Text("Learn More") 
+                       Text("Continue") 
                         .foregroundColor(Color("AccentColor"))
                         .font(.title3)
                         .frame(height: 55)

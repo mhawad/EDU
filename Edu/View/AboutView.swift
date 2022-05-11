@@ -11,10 +11,10 @@ struct AboutView: View {
     @State var curriculum = ["Pre-K","1st Grade","2nd Grade","3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade"]
     
     var body: some View {
+        
         ZStack (alignment: .top){
             Color("Gray")
                 .ignoresSafeArea()
-            
             
             ScrollView {
                 VStack(alignment: .trailing, spacing: 20){
@@ -37,7 +37,7 @@ struct AboutView: View {
                                 .padding(.top)
                                 .padding()
                         )
-                
+                    
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color("Red").opacity(0.1))
                         .frame(height: 350)
@@ -61,10 +61,6 @@ struct AboutView: View {
                                 .padding()
                         )
                     
-                    
-                    
-                    
-                    
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color("Red").opacity(0.1))
                         .frame(height: 230)
@@ -87,34 +83,35 @@ struct AboutView: View {
                 .padding(.top, 170)
                 .padding()
             }
-
+            
             WaterShape()
                 .fill(
                     LinearGradient(gradient: Gradient(colors: [Color ("AccentColor"), Color ("Gray")]),
                                    startPoint: .topLeading,
                                    endPoint: .bottomTrailing)
                 )
-                .frame(height: UIScreen.main.bounds.height * 0.28)
+                .frame(height: UIScreen.main.bounds.height * 0.4)
                 .rotationEffect(Angle(degrees: 180))
                 .shadow(radius: 10)
                 .ignoresSafeArea()
-                .overlay(
-                    Circle()
-                        .frame(width: 150, height: 150)
-                        .foregroundColor(Color("Yellow"))
-                        .shadow(radius: 10)
-                        .overlay(
-                            Text("About \nus")
-                                .foregroundColor(Color("AccentColor"))
-                                .font(.system(size: 15, weight:.bold, design: .serif))
-                               // .multilineTextAlignment(.center)
-                                .padding(.bottom, 80)
-                        ) ,
-                    alignment: .top
-                )
+            VStack {
+                Circle()
+                    .frame(width: 150, height: 150)
+                    .foregroundColor(Color("Yellow"))
+                    .shadow(radius: 10)
+                    .overlay(
+                        Text("About \nus")
+                            .foregroundColor(Color("AccentColor"))
+                            .font(.system(size: 25, weight:.bold, design: .serif))
+                            .multilineTextAlignment(.center)
+                            .padding()
+                    )
             }
-        
+            
+        }
     }
+    
+    
 }
 
 struct AboutView_Previews: PreviewProvider {
