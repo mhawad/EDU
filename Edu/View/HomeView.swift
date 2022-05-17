@@ -16,7 +16,7 @@ struct HomeView: View {
                 .ignoresSafeArea()
          
             ScrollView {
-                VStack {
+                VStack(spacing: 20) {
                     SearchBarView(searchText: $vm.searchText)
                     VideoView(videoID:"QqHvUnUfwvI")
                         .frame(height: UIScreen.main.bounds.height * 0.3)
@@ -24,7 +24,7 @@ struct HomeView: View {
                         .padding(.horizontal, 24)
 
                     
-                    GridView()
+                   // GridView()
                     FooterView()
                 
                 }

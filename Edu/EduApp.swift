@@ -14,14 +14,18 @@ struct EduApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                WelcomeView()
+                
+              //  WelcomeView()
                 // HomeView()
                 //  AboutView()
-                // MainTabView()
-                //  ContactView()
+               //  MainTabView()
+               // ParentsView()
+                 ContactView()
                 //AdmissionView()
+              //  SupportView()
+               // MapTest()
             }
-            .environmentObject(vm)
+           .environmentObject(vm)
         }
     }
 }

@@ -53,10 +53,11 @@ struct WelcomeView: View {
                        Text("Continue") 
                         .foregroundColor(Color("AccentColor"))
                         .font(.title3)
-                        .frame(height: 55)
-                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, maxHeight: 55)
+                        .padding(.horizontal, 20)
                         .background(Color("Yellow"))
                         .clipShape(Capsule())
+                        .padding()
                       
                     }
                     
