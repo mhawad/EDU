@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CalendarView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Link("2022-2023 Suggested Academic Calendar", destination: URL(string: "https://www.holyyouthchristianacademy.org/_files/ugd/39377a_f24103916fc74d758fd78f08d4ce318f.pdf")!)
+
     }
 }
 

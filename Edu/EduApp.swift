@@ -11,19 +11,33 @@ import SwiftUI
 struct EduApp: App {
     
     @StateObject var vm = HomeViewModel()
+ //   @ObservedObject var viewModel = TeachersViewModel(teacher: teacher)
+
+ 
+
+    
+    
     var body: some Scene {
+ 
+        
         WindowGroup {
             NavigationView {
                 
-              //  WelcomeView()
-                // HomeView()
+               // WelcomeView()
+             //   GridView()
+              //  AcademicsView()
+                HomeView()
                 //  AboutView()
                //  MainTabView()
                // ParentsView()
-                 ContactView()
+               //  ContactView()
                 //AdmissionView()
               //  SupportView()
                // MapTest()
+               // TuitionView()
+               // FooterView()
+              //TeachersView()
+               // TransportationView()
             }
            .environmentObject(vm)
         }

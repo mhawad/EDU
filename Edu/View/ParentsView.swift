@@ -9,93 +9,147 @@ import SwiftUI
 
 
 
-class CalendarLoader {
-    
-    let url = URL(string: "https://picsum.photos/200")!
-    
-    func downloadCalendar(completionHandler: @escaping (_ image: UIImage?, _ error: Error?) -> ()) {
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            
-            guard
-                let data = data,
-                let image = UIImage(data: data),
-                let response = response as? HTTPURLResponse,
-                response.statusCode >= 200 && response.statusCode < 300 else {
-                completionHandler(nil, error)
-                print("nah")
-                return
-            }
-            completionHandler(image, nil)
-            print("yay")
-        }
-        .resume()
-    }
-}
-
-
-
-
-class CalendarViewModel: ObservableObject {
-    
-    @Published var image: UIImage? = nil
-    let loader = CalendarLoader()
-    
-    func fetchImage() {
-        loader.downloadCalendar { [weak self] image, error in
-            DispatchQueue.main.async {
-                self?.image = image
-            }
-        }
-    }
-    
-    
-}
-
-
-
 
 struct ParentsView: View {
-    @StateObject var vm = CalendarViewModel()
-    
-    @ObservedObject var networkManager = NetworkManager()
-    
+    let allParenentsMenuCategories = ParentsMenuCategory.allCategories
     
     var body: some View {
         
-//        NavigationView {
-//            List(networkManager.posts){ post in
-//                NavigationLink(destination: DetailView(url: post.url)) {
-//                    HStack {
-//                        Text(String(post.points))
-//                        Text(post.title)
-//                    }
-//
-//                }
-//               // .navigationBarTitle("H4XOR News")
-//            }
-        
-        ZStack {
-            if let image = vm.image {
-                Image(uiImage: image)
+        ZStack (alignment: .top){
+            Color("Gray")
+                .ignoresSafeArea()
+            
+            ScrollView {
+                VStack(alignment: .center, spacing: 20){
+                    
+                    //                NavigationView {
+                    //                    List(allParenentsMenuCategories, id: \.id){ parentsMenuCategory in
+                    //                        NavigationLink(
+                    //                            destination: SecondParentsView(parentsMenuCategory: parentsMenuCategory),
+                    //                            label: {
+                    //                                    Text(parentsMenuCategory.name.capitalized)
+                    //                            })
+                    //                    }
+                    //                    .navigationBarTitleDisplayMode(.inline)
+                    //                }
+                    //                .navigationViewStyle(StackNavigationViewStyle())
+                    
+                    
+                    
+                    NavigationView{
+                        List(allParenentsMenuCategories, id: \.id){ parentsMenuCategory in
+                            NavigationLink("Calendar", destination: CalendarView())
+                                .padding()
+                            NavigationLink("Tuition", destination: TuitionView())
+                                .padding()
+                            NavigationLink("Admission", destination: AdmissionView())
+                                .padding()
+                            
+                        }
+                        .navigationBarTitleDisplayMode(.inline)
+                    }
+                    .frame(width: 450, height:500)
+                    .navigationViewStyle(StackNavigationViewStyle())
+                    
+                    Spacer()
+                    FooterView()
+                }
+                .padding(.top, 120)
+                
+            }
+            
+            
+            
+            
+            WaterShape()
+                .fill(
+                    LinearGradient(gradient: Gradient(colors: [Color ("AccentColor"), Color ("Gray")]),
+                                   startPoint: .topLeading,
+                                   endPoint: .bottomTrailing)
+                )
+                .frame(height: UIScreen.main.bounds.height * 0.4)
+                .rotationEffect(Angle(degrees: 180))
+                .shadow(radius: 10)
+                .ignoresSafeArea()
+            
+            
+            
+            VStack {
+                Text("Parents")
+                    .font(.system(size: 45, weight:.bold, design: .serif))
+                Image("logo")
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 250, height: 250)
+                    .frame(width: 150, height: 150)
+                    .shadow(radius: 5)
             }
+            .frame(height: UIScreen.main.bounds.height * 0.1)
+            
+            
         }
-            .onAppear {
-                vm.fetchImage()
-              // self.networkManager.fetchData()
-            }
-        }
-        
     }
     
+    
+}
 
 
-    struct ParentsView_Previews: PreviewProvider {
-        static var previews: some View {
-            ParentsView()
-        }
+
+
+
+
+
+struct ParentsMenuItem {
+    var id : UUID
+    var name : String
+    
+    
+    init(name: String ) {
+        self.id = UUID()
+        self.name = name
+        
     }
+}
+
+
+struct ParentsMenuCategory: Identifiable {
+    var id: UUID
+    var name: String
+    var parentsMenuList: [ParentsMenuItem]
+    
+    init(name: String, parentsMenuList: [ParentsMenuItem] ) {
+        self.id = UUID()
+        self.name = name
+        self.parentsMenuList = parentsMenuList
+    }
+    
+    
+    static let allCategories = [
+        //        ParentsMenuCategory(name: "Calendar",
+        //                            parentsMenuList: [ParentsMenuItem(name: "Calendar1"),
+        //                                              ParentsMenuItem(name: "Calendar2"),
+        //                                              ParentsMenuItem(name: "Calendar3"),
+        //                                             ]),
+        //       ParentsMenuCategory(name: "Tuition",
+        //                        parentsMenuList: [ParentsMenuItem(name: "1st grade"),
+        //                                          ParentsMenuItem(name: "2nd grade"),
+        //                                          ParentsMenuItem(name: "3rd grade"),
+        //                         ]),
+        
+        ParentsMenuCategory(name: "Transportation",
+                            parentsMenuList: [ParentsMenuItem(name: "1st grade"),
+                                              ParentsMenuItem(name: "2nd grade"),
+                                              ParentsMenuItem(name: "3rd grade"),
+                                             ])
+        
+    ]
+    
+}
+
+
+
+
+struct ParentsView_Previews: PreviewProvider {
+    static var previews: some View {
+        ParentsView()
+    }
+}
 

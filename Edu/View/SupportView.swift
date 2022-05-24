@@ -154,13 +154,13 @@ struct SupportView: View {
                                    startPoint: .topLeading,
                                    endPoint: .bottomTrailing)
                 )
+                .frame(height: UIScreen.main.bounds.height * 0.4)
                 .rotationEffect(Angle(degrees: 180))
                 .shadow(radius: 10)
                 .ignoresSafeArea()
-                .frame(height: UIScreen.main.bounds.height * 0.5)
+             
             
-            
-            
+
             VStack {
                 Text("Support Us")
                     .font(.system(size: 45, weight:.bold, design: .serif))
@@ -169,6 +169,8 @@ struct SupportView: View {
                     .frame(width: 150, height: 150)
                     .shadow(radius: 5)
             }
+            .frame(height: UIScreen.main.bounds.height * 0.1)
+
         }
     }
 }

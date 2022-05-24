@@ -16,7 +16,6 @@ struct MapTest: View {
     Location(coordinate: CLLocationCoordinate2D(latitude: 35.850550, longitude: -79.078910))
     ]
     var body: some View {
-        //Map(coordinateRegion: $region)
         Map(coordinateRegion: $region,
             annotationItems: places,
             annotationContent: { place in
